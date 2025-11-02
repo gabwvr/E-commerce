@@ -18,6 +18,21 @@ form { display: flex; flex-direction: column; }
 }
 .form-cadastro > * + * { margin-top: 16px; }
 
+/* Wrapper para ações dentro do input (mostrar/ocultar senha) */
+.input-wrap { position: relative; }
+.input-wrap .input { padding-right: 44px; }
+.input-action {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #333;
+}
+
 /* Responsivo para celular: inputs confortáveis e layout em uma coluna */
 @media (max-width: 480px) {
   .auth-card { max-width: 420px; }

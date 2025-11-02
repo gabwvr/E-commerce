@@ -1,26 +1,45 @@
+<!-- Template da Simulação Mobile: moldura de smartphone com cabeçalho e iframe do app -->
 <div class="mobile-page">
   <div class="topbar">
     <a routerLink="/catalogo" class="botao"><span class="material-symbols-rounded">arrow_back</span> Voltar para a loja de navegador</a>
   </div>
 
-  <!-- Moldura de celular iPhone realista -->
-  <div class="phone-frame iphone">
+  <!-- Moldura de celular moderna (nova) -->
+  <div class="phone-frame">
     <div class="phone-notch"></div>
     <div class="phone-side-btn btn-top"></div>
     <div class="phone-side-btn btn-mid"></div>
     <div class="phone-side-btn btn-low"></div>
     <div class="phone-screen">
-      <!-- Carrega o próprio app dentro da moldura, usando viewport de celular -->
+      <!-- Cabeçalho estilo navegador embutido no molde (logo ampliada, fundo branco, sem label) -->
+      <div class="mobile-header" role="navigation" aria-label="Cabeçalho do app mobile">
+        <div class="brand">
+          <img src="assets/logo-cabecalho.png" alt="Logo" class="logo">
+        </div>
+        <nav class="nav center">
+          <!-- sem label "Catálogo de produtos" -->
+          <button type="button" class="nav-link nav-primary" (click)="ir('/catalogo')" aria-label="Catálogo">
+            <span class="material-symbols-rounded">shopping_bag</span>
+          </button>
+        </nav>
+        <div class="nav-right">
+          <button type="button" class="icon-link" (click)="ir('/carrinho')" aria-label="Carrinho">
+            <span class="material-symbols-rounded">shopping_cart</span>
+          </button>
+          <button type="button" class="icon-link" (click)="abrirConta()" aria-label="Minha Conta">
+            <span class="material-symbols-rounded">person</span>
+          </button>
+        </div>
+      </div>
+      <!-- App carregado dentro da moldura, abaixo do cabeçalho -->
       <iframe [src]="iframeUrl" title="Simulação Mobile" class="phone-iframe"></iframe>
     </div>
   </div>
 
   <div class="card" style="padding: 14px; margin-top: 12px; max-width: 780px; margin-left:auto; margin-right:auto;">
-    <div class="titulo"><span class="material-symbols-rounded">info</span> Sobre o App</div>
+    <div class="titulo"><span class="material-symbols-rounded">info</span> Simulação Mobile</div>
     <div style="color: var(--muted)">
-      Simulação visual do projeto em um smartphone iPhone.
-      O aplicativo mobile real está em Flutter no diretório <code>mobile/lib/main.dart</code>,
-      consumindo a mesma API do backend.
+      Visualização do app dentro de um molde de smartphone. O app real em Flutter está no diretório <code>mobile/lib/main.dart</code> e usa a mesma API.
     </div>
   </div>
 </div>

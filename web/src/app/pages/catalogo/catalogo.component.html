@@ -1,9 +1,10 @@
+<!-- Template do Catálogo: filtro por categoria, alternância de modo e listagem de produtos (grid/lista) -->
 <div>
   <div style="display:flex; gap:12px; align-items:center; margin-bottom: 12px; flex-wrap: wrap;">
     <span class="label-acao"><span class="material-symbols-rounded">sell</span> Filtro por categoria:</span>
     <select class="input" style="max-width: 260px" (change)="selecionarCategoria($event.target.value)">
       <option value="">Todas</option>
-      <option *ngFor="let c of categorias" [value]="c.id">{{ c.nome }}</option>
+      <option *ngFor="let c of categorias" [value]="c.id">{{ nomeCategoria(c) }}</option>
     </select>
 
     <div class="modo-toggle" style="margin-left:auto">
@@ -27,10 +28,10 @@
 
   <div *ngIf="modo==='grid'" class="grid">
     <div class="card" *ngFor="let p of produtos">
-      <img [src]="p.imagem_url" [alt]="p.nome">
+      <img [src]="p.imagem_url" [alt]="p.nome" loading="lazy" referrerpolicy="no-referrer" (error)="imagemFallback($event)">
       <div class="conteudo">
         <div class="nome">{{ p.nome }}</div>
-        <div class="preco">R$ {{ p.preco }}</div>
+        <div class="preco">{{ p.preco | currency:'BRL':'symbol':'1.2-2' }}</div>
         <button class="botao" (click)="adicionar(p.id)"><span class="material-symbols-rounded">add_shopping_cart</span> Adicionar ao Carrinho</button>
       </div>
     </div>
@@ -38,10 +39,10 @@
 
   <div *ngIf="modo==='lista'" class="lista">
     <div class="item" *ngFor="let p of produtos">
-      <img [src]="p.imagem_url" [alt]="p.nome">
+      <img [src]="p.imagem_url" [alt]="p.nome" loading="lazy" referrerpolicy="no-referrer" (error)="imagemFallback($event)">
       <div style="flex:1">
         <div class="nome">{{ p.nome }}</div>
-        <div class="preco">R$ {{ p.preco }}</div>
+        <div class="preco">{{ p.preco | currency:'BRL':'symbol':'1.2-2' }}</div>
       </div>
       <button class="botao" (click)="adicionar(p.id)"><span class="material-symbols-rounded">add_shopping_cart</span> Adicionar</button>
     </div>

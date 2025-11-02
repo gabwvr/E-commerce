@@ -1,36 +1,30 @@
-# Ignorar arquivos comuns do projeto multi (Angular, Node, Flutter)
+# Root-level ignores for Node/Angular/Flutter workspace
 
-# Geral
-*.log
+# Node.js
 node_modules/
-.env
-dist/
-tmp/
-temp/
-Thumbs.db
-.DS_Store
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Web (Angular)
-web/node_modules/
+# Angular (web)
 web/dist/
 web/.angular/
-web/.env
-web/.npmrc
 
-# Backend (Node/Express)
-backend/node_modules/
-backend/dist/
-backend/.env
-backend/.npmrc
-
-# Flutter (mobile)
-mobile/.dart_tool/
-mobile/build/
-mobile/.packages
-mobile/.flutter-plugins
-mobile/.flutter-plugins-dependencies
-
-# IDE / Editor
+# IDE/editor
 .vscode/
 .idea/
-*.swp
+
+# Environment secrets (backend)
+backend/.env
+backend/.env.*
+
+# Flutter (mobile)
+mobile/build/
+mobile/.dart_tool/
+
+# Misc
+*.log
+*.tmp
+*.temp
+~*

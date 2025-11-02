@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ServicoApi {
-  // Endereço da API (ajuste se necessário)
-  apiUrl = 'http://localhost:3000/api';
+  // Endereço da API: usa caminho relativo para mesma origem/porta
+  apiUrl = '/api';
 
   // Token do usuário logado (simples, guardado em memória)
   token: string | null = null;
@@ -29,6 +29,12 @@ export class ServicoApi {
   login(email: string, senha: string): Observable<any> {
     // Faz login e retorna token
     return this.http.post(`${this.apiUrl}/auth/login`, { email, senha }, { headers: this.headersAuth() });
+  }
+
+  // CEP (ViaCEP)
+  buscarCep(cep: string): Observable<any> {
+    const cepNum = (cep || '').replace(/\D/g, '').slice(0, 8);
+    return this.http.get(`https://viacep.com.br/ws/${cepNum}/json/`);
   }
 
   // Catálogo
@@ -74,5 +80,9 @@ export class ServicoApi {
   obterPedido(id: number): Observable<any> {
     // Obtém detalhes de um pedido
     return this.http.get(`${this.apiUrl}/pedidos/${id}`, { headers: this.headersAuth() });
+  }
+  // Logout simples: limpa token em memória
+  logout(): void {
+    this.token = null;
   }
 }

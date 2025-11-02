@@ -40,6 +40,8 @@ export class CarrinhoComponent implements OnInit {
   }
 
   finalizarCompra() {
+    // Exige login; se não logado, mostra aviso
+    if (!this.api.token) { this.mensagem = 'É necessário estar logado para finalizar a compra.'; return; }
     this.api.finalizarCompra(this.enderecoSelecionado || undefined).subscribe({
       next: (res) => {
         this.router.navigate(['/resumo', res.pedido.numero], { state: { mensagem: 'Compra finalizada!' } });

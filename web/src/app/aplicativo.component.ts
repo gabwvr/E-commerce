@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { ServicoApi } from './services/servico-api.service';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +22,9 @@ import { Title } from '@angular/platform-browser';
         <a routerLink="/carrinho" class="icon-link" aria-label="Carrinho">
           <span class="material-symbols-rounded">shopping_cart</span>
         </a>
-        <a routerLink="/login" class="icon-link" aria-label="Login">
+        <button type="button" class="icon-link" (click)="abrirConta()" aria-label="Minha Conta">
           <span class="material-symbols-rounded">person</span>
-        </a>
+        </button>
         <a routerLink="/mobile" class="icon-link" aria-label="App Mobile (Flutter)">
           <span class="material-symbols-rounded">smartphone</span>
         </a>
@@ -40,7 +41,7 @@ export class ComponenteAplicativo {
   // Quando true, esconde o cabeçalho para parecer um app mobile
   isMobileMode = false;
 
-  constructor(private router: Router, private title: Title) {
+  constructor(private router: Router, private title: Title, private api: ServicoApi) {
     // Detecta se o app está embutido em iframe (simulação mobile)
     // Se estiver dentro de um iframe, vamos ocultar o cabeçalho
     try {
@@ -53,12 +54,21 @@ export class ComponenteAplicativo {
         const pageTitle = this.getRouteTitle();
         this.title.setTitle(`${pageTitle} | E-commerce`);
         const url = this.router.url || '';
-        // Se a rota é /mobile, se tem ?mobile=1, ou se está embutido, ativa modo mobile
+        // Mantém cabeçalho visível na rota /mobile; oculta apenas em iframe ou query
         const hasMobileQuery = url.includes('mobile=1');
         const onMobileRoute = url.startsWith('/mobile');
-        this.isMobileMode = onMobileRoute || hasMobileQuery || this.isEmbedded;
+        // Oculta cabeçalho também na rota /mobile
+        this.isMobileMode = hasMobileQuery || this.isEmbedded || onMobileRoute;
       }
     });
+  }
+
+  abrirConta() {
+    if (this.api.token) {
+      this.router.navigate(['/minha-conta']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   private getRouteTitle(): string {

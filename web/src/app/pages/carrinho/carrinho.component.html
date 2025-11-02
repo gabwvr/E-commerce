@@ -17,8 +17,8 @@
         <img [src]="item.imagem_url" [alt]="item.nome">
         <div>
           <div class="nome"><span class="material-symbols-rounded">inventory_2</span> {{ item.nome }}</div>
-          <div class="meta"><span class="material-symbols-rounded">sell</span> Preço: R$ {{ item.preco }}</div>
-          <div class="preco"><span class="material-symbols-rounded">payments</span> Subtotal: R$ {{ item.subtotal }}</div>
+          <div class="meta"><span class="material-symbols-rounded">sell</span> Preço: {{ item.preco | currency:'BRL':'symbol':'1.2-2' }}</div>
+          <div class="preco"><span class="material-symbols-rounded">payments</span> Subtotal: {{ item.subtotal | currency:'BRL':'symbol':'1.2-2' }}</div>
         </div>
         <div style="display:flex; gap:8px; align-items:center">
           <div class="qty-stepper" aria-label="Alterar quantidade">
@@ -40,7 +40,7 @@
     <div class="resumo-card">
       <div class="titulo"><span class="material-symbols-rounded">receipt_long</span> Resumo</div>
       <div class="linha"><span>Itens</span><span>{{ itens.length }}</span></div>
-      <div class="linha total"><span>Total</span><span>R$ {{ total }}</span></div>
+      <div class="linha total"><span>Total</span><span>{{ total | currency:'BRL':'symbol':'1.2-2' }}</span></div>
 
       <div style="margin-top:12px">
         <div class="titulo" style="margin-bottom:8px"><span class="material-symbols-rounded">location_on</span> Entrega</div>

@@ -68,6 +68,11 @@ export class CatalogoComponent implements OnInit {
   }
 
   adicionar(produtoId: number) {
+    // Exige login; se não logado, mostra aviso (pop-up simples)
+    if (!this.api.token) {
+      this.mensagem = 'É necessário estar logado para adicionar ao carrinho.';
+      return;
+    }
     // Adiciona 1 item ao carrinho
     this.api.adicionarCarrinho(produtoId, 1).subscribe({
       next: () => this.mensagem = 'Produto adicionado ao carrinho! ',
@@ -76,4 +81,17 @@ export class CatalogoComponent implements OnInit {
   }
 
   alterarModo(m: 'grid' | 'lista') { this.modo = m; }
+
+  imagemFallback(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img) return;
+    // Usa um placeholder local para evitar problemas de CORS/referrer
+    img.referrerPolicy = 'no-referrer';
+    img.src = 'assets/logo-cabecalho.png';
+  }
+
+  nomeCategoria(c: any): string {
+    const nome = (c?.nome ?? '').toString();
+    return nome.replace(/\+/g, ' ');
+  }
 }

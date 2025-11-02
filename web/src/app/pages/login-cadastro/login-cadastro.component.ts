@@ -29,6 +29,15 @@ export class LoginCadastroComponent {
 
   mensagem: string | null = null;
 
+  // Mostrar/ocultar senha nos formulários
+  showLoginSenha: boolean = false;
+  showCadastroSenha: boolean = false;
+
+  // Lista de UFs para seleção no cadastro
+  ufs: string[] = [
+    'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'
+  ];
+
   constructor(private api: ServicoApi, private router: Router) {}
 
   // Alterna aba
@@ -56,7 +65,7 @@ export class LoginCadastroComponent {
   fazerCadastro() {
     // Validação bem simples
     const d = this.cadastro;
-    if (!d.nome || !d.email || !d.senha || !d.endereco.rua || !d.endereco.numero || !d.endereco.complemento || !d.endereco.bairro || !d.endereco.cidade || !d.endereco.estado || !d.endereco.cep) {
+    if (!d.nome || !d.email || !d.senha || !d.endereco.rua || !d.endereco.numero || !d.endereco.bairro || !d.endereco.cidade || !d.endereco.estado || !d.endereco.cep) {
       this.mensagem = 'Preencha todos os campos obrigatórios';
       return;
     }
@@ -88,6 +97,28 @@ export class LoginCadastroComponent {
     let out = d;
     if (d.length > 5) out = `${d.slice(0,5)}-${d.slice(5)}`;
     this.cadastro.endereco.cep = out;
+
+    // Quando completar 8 dígitos, buscar no ViaCEP e preencher
+    if (d.length === 8) {
+      this.api.buscarCep(d).subscribe({
+        next: (resp: any) => {
+          if (resp?.erro) {
+            this.mensagem = 'CEP não encontrado';
+            return;
+          }
+          // Preencher campos do endereço conforme resposta ViaCEP
+          this.cadastro.endereco.rua = resp?.logradouro || this.cadastro.endereco.rua;
+          this.cadastro.endereco.bairro = resp?.bairro || this.cadastro.endereco.bairro;
+          this.cadastro.endereco.cidade = resp?.localidade || this.cadastro.endereco.cidade;
+          // Estado (UF) vem como "SP", etc.
+          const uf = (resp?.uf || '').toUpperCase();
+          if (uf) this.cadastro.endereco.estado = uf;
+        },
+        error: () => {
+          this.mensagem = 'Erro ao consultar CEP';
+        },
+      });
+    }
   }
 
   onTelefoneChange(v: string) {

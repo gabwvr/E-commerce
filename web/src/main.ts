@@ -6,3 +6,4 @@ import { ModuloAplicativo } from './app/modulo-aplicativo';
 platformBrowserDynamic()
   .bootstrapModule(ModuloAplicativo)
   .catch(err => console.error(err));
+// Ponto de entrada do Angular: inicializa e faz bootstrap do módulo principal (AppModule).

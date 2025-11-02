@@ -1,6 +1,7 @@
 // Página de simulação do App Mobile (Flutter)
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ServicoApi } from '../../services/servico-api.service';
 
 @Component({
   selector: 'app-mobile-simulacao',
@@ -16,8 +17,17 @@ export class MobileSimulacaoComponent {
 
   iframeUrl: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private api: ServicoApi) {
     // Carrega o app normal dentro da moldura, simulando uso em mobile
     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/catalogo');
+  }
+
+  ir(path: string) {
+    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(path);
+  }
+
+  abrirConta() {
+    const destino = this.api.token ? '/minha-conta' : '/login';
+    this.ir(destino);
   }
 }
