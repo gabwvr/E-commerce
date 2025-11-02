@@ -1,0 +1,4 @@
+/* Estilo do resumo de pedido */
+.resumo-cabecalho { display:flex; gap:16px; flex-wrap:wrap; }
+.resumo-grid { display:grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 820px) { .resumo-grid { grid-template-columns: 1fr 1fr; } }

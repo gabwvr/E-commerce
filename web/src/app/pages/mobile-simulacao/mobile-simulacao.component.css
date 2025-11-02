@@ -1,0 +1,101 @@
+.phone-frame {
+  width: 380px;
+  max-width: 100%;
+  height: 740px;
+  margin: 0 auto;
+  border: 12px solid #111;
+  border-radius: 32px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  background: #000;
+  position: relative;
+}
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 24px;
+  background: #111;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.phone-screen {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  padding: 12px;
+  overflow: auto;
+}
+.screen { }
+
+/* Página com fundo branco e botão superior */
+.mobile-page {
+  background: #ffffff;
+  min-height: calc(100vh - 120px);
+  padding: 12px;
+}
+.topbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.topbar a.botao { text-decoration: none; }
+.topbar a.botao:hover { text-decoration: none; }
+
+/* Moldura iPhone mais realista e centralizada */
+.phone-frame.iphone {
+  width: 390px; /* iPhone 14 width */
+  height: 780px; /* iPhone 14 height */
+  max-width: 96vw;
+  max-height: 80vh;
+  margin: 0 auto;
+  border-radius: 48px;
+  background: linear-gradient(145deg, #1a1a1a, #0c0c0c);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35), inset 0 0 0 12px #0e0e0e, inset 0 0 0 24px #1f1f1f;
+}
+.phone-frame.iphone .phone-notch {
+  width: 140px;
+  height: 30px;
+  background: #0a0a0a;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.phone-side-btn {
+  position: absolute;
+  right: -2px;
+  width: 3px;
+  height: 60px;
+  background: #2b2b2b;
+  border-radius: 4px;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
+}
+.btn-top { top: 90px; }
+.btn-mid { top: 160px; }
+.btn-low { top: 230px; }
+
+.phone-frame.iphone .phone-screen {
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  background: #000;
+  border-radius: 34px;
+  padding: 0;
+  overflow: hidden;
+}
+.phone-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}

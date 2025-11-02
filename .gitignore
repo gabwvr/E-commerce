@@ -1,0 +1,36 @@
+# Ignorar arquivos comuns do projeto multi (Angular, Node, Flutter)
+
+# Geral
+*.log
+node_modules/
+.env
+dist/
+tmp/
+temp/
+Thumbs.db
+.DS_Store
+
+# Web (Angular)
+web/node_modules/
+web/dist/
+web/.angular/
+web/.env
+web/.npmrc
+
+# Backend (Node/Express)
+backend/node_modules/
+backend/dist/
+backend/.env
+backend/.npmrc
+
+# Flutter (mobile)
+mobile/.dart_tool/
+mobile/build/
+mobile/.packages
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp

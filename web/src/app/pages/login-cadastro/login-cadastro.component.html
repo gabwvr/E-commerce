@@ -1,0 +1,87 @@
+<!-- Página de autenticação: login e cadastro -->
+<div class="auth-page">
+  <div class="auth-card">
+  <!-- Aviso simples para feedback de erros e sucessos -->
+
+  <div *ngIf="mensagem" class="aviso" role="alert" aria-live="polite">
+    <div class="texto">
+      <span class="material-symbols-rounded" aria-hidden="true">info</span>
+      <span style="margin-left: 6px;">{{ mensagem }}</span>
+    </div>
+    <button class="fechar" (click)="mensagem=null" aria-label="Fechar aviso">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
+  </div>
+
+  <!-- Formulário de Login -->
+  <form *ngIf="aba==='login'" class="form-login" (ngSubmit)="fazerLogin()">
+    <h1 class="heading-1">Login</h1>
+    <label class="label">E-mail</label>
+    <input class="input" [(ngModel)]="login.email" name="loginEmail" type="email" required>
+    <label class="label">Senha</label>
+    <input class="input" type="password" [(ngModel)]="login.senha" name="loginSenha" required>
+    <button class="botao" type="submit">Entrar</button>
+
+    <div class="inline-cta">
+      <span class="label-acao label-acao-dark">Não tem conta?</span>
+      <span class="label-acao label-cta" (click)="irPara('cadastro')">Cadastre-se</span>
+    </div>
+  </form>
+
+  <!-- Formulário de Cadastro -->
+  <form *ngIf="aba==='cadastro'" class="form-cadastro" (ngSubmit)="fazerCadastro()">
+    <h1 class="heading-1">Cadastro</h1>
+    <!-- Dados básicos do usuário -->
+    <div class="form-grid">
+      <label class="label">Nome
+        <input class="input" [(ngModel)]="cadastro.nome" name="cadNome" required placeholder="Seu nome completo">
+      </label>
+      <label class="label">E-mail
+        <input class="input" [(ngModel)]="cadastro.email" name="cadEmail" type="email" required placeholder="seuemail@exemplo.com">
+      </label>
+      <label class="label">CPF
+        <input class="input" [(ngModel)]="cadastro.cpf" (ngModelChange)="onCpfChange($event)" name="cadCpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00">
+      </label>
+      <label class="label">Senha
+        <input class="input" type="password" [(ngModel)]="cadastro.senha" name="cadSenha" required placeholder="Crie uma senha">
+      </label>
+      <label class="label">Telefone
+        <input class="input" [(ngModel)]="cadastro.telefone" (ngModelChange)="onTelefoneChange($event)" name="cadTelefone" inputmode="numeric" maxlength="15" placeholder="(11) 99999-9999">
+      </label>
+    </div>
+
+    <h2 class="heading-2">Endereço</h2>
+    <!-- Dados do endereço do usuário -->
+    <div class="form-grid">
+      <label class="label">Rua
+        <input class="input" [(ngModel)]="cadastro.endereco.rua" name="cadRua" required placeholder="Nome da rua">
+      </label>
+      <label class="label">Número
+        <input class="input" [(ngModel)]="cadastro.endereco.numero" (ngModelChange)="onNumeroChange($event)" name="cadNumero" required inputmode="numeric" pattern="\d*" placeholder="123">
+      </label>
+      <label class="label">Complemento <small class="label-note">(não opcional)</small>
+        <input class="input" [(ngModel)]="cadastro.endereco.complemento" name="cadComplemento" required placeholder="Apto, bloco, referência">
+      </label>
+      <label class="label">Bairro
+        <input class="input" [(ngModel)]="cadastro.endereco.bairro" name="cadBairro" required placeholder="Bairro">
+      </label>
+      <label class="label">Cidade
+        <input class="input" [(ngModel)]="cadastro.endereco.cidade" name="cadCidade" required placeholder="Cidade">
+      </label>
+      <label class="label">Estado (UF)
+        <input class="input" [(ngModel)]="cadastro.endereco.estado" (ngModelChange)="onUfChange($event)" name="cadEstado" required maxlength="2" placeholder="UF" style="text-transform: uppercase;">
+      </label>
+      <label class="label">CEP
+        <input class="input" [(ngModel)]="cadastro.endereco.cep" (ngModelChange)="onCepChange($event)" name="cadCep" required inputmode="numeric" maxlength="9" placeholder="00000-000">
+      </label>
+    </div>
+    <button class="botao" type="submit">Cadastrar</button>
+
+    <div class="inline-cta">
+      <span class="label-acao label-acao-dark">Já tem conta?</span>
+      <span class="label-acao label-cta" (click)="irPara('login')">Faça login</span>
+    </div>
+  </form>
+
+  </div>
+</div>

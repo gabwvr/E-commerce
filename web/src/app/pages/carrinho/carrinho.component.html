@@ -1,0 +1,64 @@
+<div class="carrinho-grid">
+  <div>
+    <div *ngIf="mensagem" class="aviso" role="alert" aria-live="polite" style="margin-bottom: 8px;">
+      <div class="texto">
+        <span class="material-symbols-rounded" aria-hidden="true">info</span>
+        <span style="margin-left: 6px;">{{ mensagem }}</span>
+      </div>
+      <button class="fechar" (click)="mensagem=null" aria-label="Fechar aviso">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    <div *ngIf="itens.length === 0">Seu carrinho está vazio.</div>
+
+    <div class="carrinho-lista" *ngIf="itens.length > 0">
+      <div *ngFor="let item of itens" class="carrinho-item">
+        <img [src]="item.imagem_url" [alt]="item.nome">
+        <div>
+          <div class="nome"><span class="material-symbols-rounded">inventory_2</span> {{ item.nome }}</div>
+          <div class="meta"><span class="material-symbols-rounded">sell</span> Preço: R$ {{ item.preco }}</div>
+          <div class="preco"><span class="material-symbols-rounded">payments</span> Subtotal: R$ {{ item.subtotal }}</div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center">
+          <div class="qty-stepper" aria-label="Alterar quantidade">
+            <button (click)="decrementar(item)" aria-label="Diminuir">
+              <span class="material-symbols-rounded">remove</span>
+            </button>
+            <input type="number" min="1" [value]="item.quantidade" (change)="atualizar(item, $any($event.target).value)" aria-label="Quantidade">
+            <button (click)="incrementar(item)" aria-label="Aumentar">
+              <span class="material-symbols-rounded">add</span>
+            </button>
+          </div>
+          <button class="botao" (click)="remover(item)"><span class="material-symbols-rounded">delete</span> Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sticky">
+    <div class="resumo-card">
+      <div class="titulo"><span class="material-symbols-rounded">receipt_long</span> Resumo</div>
+      <div class="linha"><span>Itens</span><span>{{ itens.length }}</span></div>
+      <div class="linha total"><span>Total</span><span>R$ {{ total }}</span></div>
+
+      <div style="margin-top:12px">
+        <div class="titulo" style="margin-bottom:8px"><span class="material-symbols-rounded">location_on</span> Entrega</div>
+        <div *ngIf="enderecos.length > 0; else semEnderecos">
+          <label class="label" for="selEndereco">Selecione o endereço</label>
+          <select id="selEndereco" class="input" [(ngModel)]="enderecoSelecionado" aria-label="Selecionar endereço">
+            <option *ngFor="let e of enderecos" [value]="e.id">{{ e.rua }}, {{ e.numero }} - {{ e.bairro }} - {{ e.cidade }}/{{ e.estado }} (CEP {{ e.cep }})</option>
+          </select>
+        </div>
+        <ng-template #semEnderecos>
+          <div style="color: var(--muted)"><span class="material-symbols-rounded">help</span> Nenhum endereço cadastrado.</div>
+        </ng-template>
+      </div>
+
+      <div class="actions" style="margin-top:12px">
+        <a routerLink="/catalogo" class="link-acao"><span class="material-symbols-rounded">arrow_back</span> Continuar comprando</a>
+        <button class="botao" (click)="finalizarCompra()"><span class="material-symbols-rounded">credit_card</span> Finalizar Compra</button>
+      </div>
+    </div>
+  </aside>
+</div>

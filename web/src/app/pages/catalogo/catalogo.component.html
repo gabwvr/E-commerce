@@ -1,0 +1,49 @@
+<div>
+  <div style="display:flex; gap:12px; align-items:center; margin-bottom: 12px; flex-wrap: wrap;">
+    <span class="label-acao"><span class="material-symbols-rounded">sell</span> Filtro por categoria:</span>
+    <select class="input" style="max-width: 260px" (change)="selecionarCategoria($event.target.value)">
+      <option value="">Todas</option>
+      <option *ngFor="let c of categorias" [value]="c.id">{{ c.nome }}</option>
+    </select>
+
+    <div class="modo-toggle" style="margin-left:auto">
+      <button class="btn-icon-dark" [class.btn-icon-active]="modo==='grid'" (click)="alterarModo('grid')" aria-label="Modo grade" [attr.aria-pressed]="modo==='grid'">
+        <span class="material-symbols-rounded">grid_view</span>
+      </button>
+      <button class="btn-icon-dark" [class.btn-icon-active]="modo==='lista'" (click)="alterarModo('lista')" aria-label="Modo lista" [attr.aria-pressed]="modo==='lista'">
+        <span class="material-symbols-rounded">view_list</span>
+      </button>
+    </div>
+    <div *ngIf="mensagem" class="aviso" role="alert" aria-live="polite" style="margin-left:auto;">
+      <div class="texto">
+        <span class="material-symbols-rounded" aria-hidden="true">info</span>
+        <span style="margin-left: 6px;">{{ mensagem }}</span>
+      </div>
+      <button class="fechar" (click)="mensagem=null" aria-label="Fechar aviso">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="modo==='grid'" class="grid">
+    <div class="card" *ngFor="let p of produtos">
+      <img [src]="p.imagem_url" [alt]="p.nome">
+      <div class="conteudo">
+        <div class="nome">{{ p.nome }}</div>
+        <div class="preco">R$ {{ p.preco }}</div>
+        <button class="botao" (click)="adicionar(p.id)"><span class="material-symbols-rounded">add_shopping_cart</span> Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="modo==='lista'" class="lista">
+    <div class="item" *ngFor="let p of produtos">
+      <img [src]="p.imagem_url" [alt]="p.nome">
+      <div style="flex:1">
+        <div class="nome">{{ p.nome }}</div>
+        <div class="preco">R$ {{ p.preco }}</div>
+      </div>
+      <button class="botao" (click)="adicionar(p.id)"><span class="material-symbols-rounded">add_shopping_cart</span> Adicionar</button>
+    </div>
+  </div>
+</div>

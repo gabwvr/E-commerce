@@ -1,0 +1,318 @@
+/* Tema claro com laranja (fluent style simples) */
+:root {
+  --accent: #ff7a00; /* laranja principal */
+  --accent-strong: #e86800;
+  --bg: #f6f7fb; /* fundo neutro suave */
+  --surface: #ffffff;
+  --border: #e7e8ee;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --icon-size: 22px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 24px;
+}
+
+.titulo {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.titulo.center { text-align: center; }
+
+/* Header moderno (Fluent) */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* esquerda (logo) | centro (catálogo) | direita (ícones) */
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+}
+.logo { height: 36px; width: auto; display:block; }
+/* Ajuste solicitado: logo com 90px de altura no cabeçalho */
+.logo { height: 90px; width: auto; display:block; }
+.nav { display: flex; gap: 8px; }
+.nav.center { justify-self: center; }
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 6px 10px; /* compacto */
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+.nav-link:hover {
+  background: var(--surface);
+  border-color: var(--border);
+}
+.nav-primary { font-weight: 700; }
+.nav-right { display:flex; gap: 8px; justify-self: end; }
+.icon-link { color: var(--text); padding: 6px; border-radius: 8px; border: 1px solid transparent; }
+.icon-link:hover { background: var(--surface); border-color: var(--border); }
+
+/* Ícones maiores no cabeçalho */
+.header .material-symbols-rounded {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.botao {
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.2s ease;
+  box-shadow: 0 6px 16px rgba(230, 104, 0, 0.25);
+}
+.botao:hover { filter: brightness(1.05); }
+.botao:active { transform: translateY(1px); }
+.botao:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.input {
+  width: 100%;
+  padding: 14px 14px; /* inputs maiores e mais confortáveis */
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: var(--surface);
+  font-size: 16px;
+}
+.input:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+}
+.card .conteudo {
+  padding: 14px;
+}
+.card .nome { font-weight: 700; }
+.card .preco { color: var(--accent-strong); font-weight: 700; }
+
+/* Links de ação estilizados como botões leves */
+.link-acao {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-strong);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 122, 0, 0.08);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+}
+.link-acao:hover { background: rgba(255, 122, 0, 0.14); }
+
+/* Avisos interativos visíveis (com ícone e botão de fechar) */
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--accent-strong);
+  background: rgba(255, 122, 0, 0.18);
+  color: var(--accent-strong);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(230, 104, 0, 0.22);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+}
+.aviso:hover { transform: translateY(-1px); background: rgba(255, 122, 0, 0.24); }
+.aviso .texto { flex: 1; }
+.aviso .fechar {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--accent-strong);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+.aviso .fechar:hover { border-color: var(--border); background: rgba(255, 122, 0, 0.08); }
+
+/* Labels de ação com um pouco de preto */
+.label-acao-dark { color: #111; font-weight: 700; }
+.link-acao:active { transform: translateY(1px); }
+.label-acao { color: var(--accent-strong); margin-right: 6px; font-weight: 700; }
+.label-cta { cursor: pointer; user-select: none; padding: 4px 6px; border-radius: 8px; }
+.label-cta:hover { background: rgba(255, 122, 0, 0.08); }
+/* Sem sublinhado para estado ativo, conforme solicitado */
+.label-cta.active { text-decoration: none; }
+
+/* Ícones com espaçamento e leve animação */
+.icon { display: inline-block; margin-right: 6px; }
+.botao .icon { margin-right: 8px; }
+
+/* Lista (modo alternativo ao grid) */
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lista .item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.lista .item img { width: 140px; height: 100px; object-fit: contain; background: #f8f9fa; border-radius: 10px; }
+.lista .item .nome { font-weight: 700; }
+.lista .item .preco { color: var(--accent-strong); font-weight: 700; }
+
+/* Toggle de modo de exibição */
+.modo-toggle { display:flex; gap:8px; align-items:center; }
+.main {
+  min-height: 100vh;
+  padding: 20px; /* compacto sem perder conforto */
+}
+
+/* Botões de modo com apenas ícones e cor preta */
+.btn-icon-dark {
+  background: transparent;
+  color: #000;
+  border: 1px solid #000;
+  padding: 10px; /* maior área de toque */
+  border-radius: 12px; /* cantos um pouco maiores */
+  display: inline-flex;
+  align-items: center;
+}
+.btn-icon-dark .material-symbols-rounded { color: #000; font-size: 24px; }
+.btn-icon-dark:active { transform: translateY(1px); }
+.btn-icon-dark:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.18); }
+/* Estado ativo laranja para botões de modo */
+.btn-icon-dark.btn-icon-active {
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #fff;
+  border-color: var(--accent-strong);
+}
+.btn-icon-dark.btn-icon-active .material-symbols-rounded { color: #fff; }
+
+/* Página de autenticação em tela cheia */
+.auth-page {
+  min-height: calc(100vh - 120px); /* ajustado considerando header com logo de 90px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7f8fc 35%, #f0f1f7 100%);
+  overflow: hidden; /* remove scroll na página de login/cadastro */
+}
+.auth-card {
+  width: 100%;
+  max-width: 560px; /* mais estreito sem espremer conteúdo */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  padding: 20px;
+}
+
+/* Responsividade geral para celular */
+@media (max-width: 480px) {
+  /* Remover o rótulo "Catálogo de produtos" do cabeçalho no celular, mantendo o ícone */
+  .header .nav .nav-primary span + span { display: none; }
+  /* Remover o ícone de celular do cabeçalho em telas pequenas */
+  .header .nav-right a[aria-label="App Mobile (Flutter)"] { display: none; }
+
+  .main { padding: 12px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .card img { height: 140px; }
+  .lista .item img { width: 90px; height: 70px; }
+  .auth-card { max-width: 420px; padding: 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .input { font-size: 16px; padding: 12px; }
+}
+.label { color: var(--accent-strong); font-weight: 600; display:block; margin: 6px 0; }
+.form-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.form-grid .input { margin-bottom: 0; }
+.form-actions { display:flex; gap:12px; align-items:center; margin-top: 12px; }
+
+/* Evita overflow em elementos (input/labels) */
+*, *::before, *::after { box-sizing: border-box; }
+.input { max-width: 100%; }
+
+/* Sistema de Títulos (tipografia consistente) */
+.heading-1 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 16px;
+}
+.heading-2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin: 24px 0 12px;
+}
+
+/* Seções para agrupar campos e conteúdos */
+.section {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Espaçamento vertical consistente entre elementos dentro de seções */
+.section > * + * { margin-top: 12px; }
+
+/* CTAs inline (label preto + link laranja) */
+.inline-cta { display: flex; align-items: center; gap: 8px; }
+.inline-cta .label-acao-dark { color: var(--text-color); }
+.inline-cta .link-acao { color: var(--primary-color); cursor: pointer; }
+
+/* Utilitário para Material Symbols */
+.material-symbols-rounded, .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: var(--icon-size);
+  line-height: 1;
+  vertical-align: middle;
+}

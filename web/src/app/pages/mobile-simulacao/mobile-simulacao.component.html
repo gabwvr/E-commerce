@@ -1,0 +1,26 @@
+<div class="mobile-page">
+  <div class="topbar">
+    <a routerLink="/catalogo" class="botao"><span class="material-symbols-rounded">arrow_back</span> Voltar para a loja de navegador</a>
+  </div>
+
+  <!-- Moldura de celular iPhone realista -->
+  <div class="phone-frame iphone">
+    <div class="phone-notch"></div>
+    <div class="phone-side-btn btn-top"></div>
+    <div class="phone-side-btn btn-mid"></div>
+    <div class="phone-side-btn btn-low"></div>
+    <div class="phone-screen">
+      <!-- Carrega o próprio app dentro da moldura, usando viewport de celular -->
+      <iframe [src]="iframeUrl" title="Simulação Mobile" class="phone-iframe"></iframe>
+    </div>
+  </div>
+
+  <div class="card" style="padding: 14px; margin-top: 12px; max-width: 780px; margin-left:auto; margin-right:auto;">
+    <div class="titulo"><span class="material-symbols-rounded">info</span> Sobre o App</div>
+    <div style="color: var(--muted)">
+      Simulação visual do projeto em um smartphone iPhone.
+      O aplicativo mobile real está em Flutter no diretório <code>mobile/lib/main.dart</code>,
+      consumindo a mesma API do backend.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+/* Layout do carrinho mais profissional */
+.carrinho-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+}
+
+.carrinho-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.carrinho-item {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 14px;
+}
+.carrinho-item img {
+  width: 140px; height: 100px; object-fit: contain; background: #f8f9fa; border-radius: 10px;
+}
+.carrinho-item .nome { font-weight: 700; }
+.carrinho-item .preco { color: var(--accent-strong); font-weight: 700; }
+.carrinho-item .meta { color: var(--muted); }
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.qty-stepper button {
+  background: #fff;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.qty-stepper input {
+  width: 60px;
+  border: none;
+  text-align: center;
+  padding: 8px 4px;
+}
+
+.resumo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  padding: 14px;
+}
+.resumo-card .linha { display:flex; justify-content: space-between; margin: 6px 0; }
+.resumo-card .total { font-weight: 800; font-size: 20px; color: var(--accent-strong); }
+.resumo-card .actions { display:flex; gap:12px; }
+
+.sticky {
+  position: sticky;
+  top: 82px; /* abaixo do header */
+}
+
+/* Responsivo para celular */
+@media (max-width: 480px) {
+  .carrinho-grid { grid-template-columns: 1fr; }
+  .carrinho-item { grid-template-columns: 100px 1fr auto; }
+  .carrinho-item img { width: 100px; height: 80px; }
+  .sticky { position: static; top: auto; }
+}

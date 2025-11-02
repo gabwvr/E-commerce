@@ -1,0 +1,41 @@
+<div>
+  <div *ngIf="mensagem" class="aviso" role="alert" aria-live="polite" style="margin-bottom: 8px;">
+    <div class="texto">
+      <span class="material-symbols-rounded" aria-hidden="true">info</span>
+      <span style="margin-left: 6px;">{{ mensagem }}</span>
+    </div>
+    <button class="fechar" (click)="mensagem=null" aria-label="Fechar aviso">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
+  </div>
+  <div *ngIf="!resumo" class="card" style="padding: 14px;">Carregando...</div>
+  <div *ngIf="resumo" class="card" style="padding: 16px;">
+    <div class="titulo"><span class="material-symbols-rounded">receipt_long</span> Nota Fiscal / Resumo do Pedido</div>
+    <div class="card" style="padding: 12px; margin-bottom: 12px; display:flex; gap:16px; flex-wrap:wrap;">
+      <div><strong>Pedido Nº</strong> {{ resumo.numero }}</div>
+      <div><span class="material-symbols-rounded">attach_money</span> <strong>Total</strong>: R$ {{ resumo.total }}</div>
+      <div><span class="material-symbols-rounded">calendar_month</span> <strong>Data</strong>: {{ resumo.criado_em | date:'short' }}</div>
+    </div>
+
+    <div class="titulo"><span class="material-symbols-rounded">location_on</span> Entrega</div>
+    <div *ngIf="resumo.endereco; else semEndereco" class="card" style="padding: 12px; margin-bottom: 12px;">
+      <div><span class="material-symbols-rounded">signpost</span> {{ resumo.endereco.rua }}, {{ resumo.endereco.numero }} - {{ resumo.endereco.bairro }}</div>
+      <div><span class="material-symbols-rounded">location_city</span> {{ resumo.endereco.cidade }} / {{ resumo.endereco.estado }} - CEP {{ resumo.endereco.cep }}</div>
+    </div>
+    <ng-template #semEndereco>
+      <div class="card" style="padding: 12px; margin-bottom: 12px;"><span class="material-symbols-rounded">help</span> Sem endereço selecionado.</div>
+    </ng-template>
+
+    <div class="titulo"><span class="material-symbols-rounded">inventory_2</span> Itens</div>
+    <div *ngFor="let i of resumo.itens" class="card" style="padding: 12px; margin-bottom: 10px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+      <div style="flex:1">
+        <div><span class="material-symbols-rounded">inventory_2</span> <strong>{{ i.nome }}</strong></div>
+        <div style="color: var(--muted)"><span class="material-symbols-rounded">sell</span> Preço: R$ {{ i.preco }} | <span class="material-symbols-rounded">layers</span> Qtd: {{ i.quantidade }} | <span class="material-symbols-rounded">payments</span> Subtotal: R$ {{ i.subtotal }}</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; margin-top: 8px;">
+      <a routerLink="/catalogo" class="link-acao"><span class="material-symbols-rounded">arrow_back</span> Voltar ao catálogo</a>
+      <a routerLink="/carrinho" class="link-acao"><span class="material-symbols-rounded">shopping_cart</span> Ver carrinho</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+/* Estilo simples para os formulários de login e cadastro */
+/* Comentários curtos e claros, em português */
+form { display: flex; flex-direction: column; }
+
+/* Aumenta verticalmente o formulário de login */
+.form-login {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 360px;
+}
+/* Espaçamento vertical entre elementos do formulário sem contêiner extra */
+.form-login > * + * { margin-top: 12px; }
+
+/* Espaçamento simples para o formulário de cadastro (sem divs aninhadas) */
+.form-cadastro {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.form-cadastro > * + * { margin-top: 16px; }
+
+/* Responsivo para celular: inputs confortáveis e layout em uma coluna */
+@media (max-width: 480px) {
+  .auth-card { max-width: 420px; }
+  form .input { font-size: 16px; padding: 12px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Nota pequena ao lado do rótulo */
+.label .label-note {
+  font-size: 12px;
+  font-weight: normal;
+  color: #666;
+  margin-left: 4px;
+}
